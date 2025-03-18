@@ -20,7 +20,7 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign({ email: admin.email }, process.env.JWT_SECRET , { expiresIn: "1h" });
 
-    res.cookie("token",token, { httpOnly: true , secure: process.env.NODE_ENV === "production", sameSite: "strict",}).json({message: "Login successful"});  //ask why secure false
+    res.cookie("token",token, { httpOnly: true , secure: process.env.NODE_ENV === "production", sameSite: "None",}).json({message: "Login successful"});  //ask why secure false
 });
 
 router.post('/logout', (req,res) => {
