@@ -12,9 +12,9 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: "http://localhost:5173", // Allow frontend domain
+    origin: ["http://localhost:5173", "https://coupon-distribution-web-app-ecmj.vercel.app"], // ✅ Allow both local and deployed frontend
     credentials: true, // Allow cookies & authentication headers
-  }));
+}));
 app.use(express.json());
 app.use(cookieParser());
 const port = process.env.PORT;
