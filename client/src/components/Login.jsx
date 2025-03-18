@@ -6,9 +6,11 @@ const Login = ({ setshowLogin , setisLoggedIn , setresponseMessage }) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setloading(true);
     const response = await login(email,password);
     if(response.success){
         setresponseMessage(response.message);
@@ -24,6 +26,8 @@ const Login = ({ setshowLogin , setisLoggedIn , setresponseMessage }) => {
         setresponseMessage("");
       }, 3000);
     }
+    setloading(false)
+
     
   };
 
@@ -72,6 +76,7 @@ const Login = ({ setshowLogin , setisLoggedIn , setresponseMessage }) => {
           type="button"
           className="bg-orange-300 text-white text-lg font-medium px-16 ml-5 py-1 border border-transparent hover:bg-white hover:text-orange-300 hover:border-orange-300">close</button>
         </div>
+        {loading ?? <div>Please wait</div>}
         
       </form>
     </div>
