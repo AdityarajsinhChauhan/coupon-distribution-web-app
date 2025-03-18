@@ -11,10 +11,18 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
-app.use(cors({
-    origin: ["http://localhost:5173", "https://coupon-distribution-web-app-ecmj.vercel.app"], // ✅ Allow both local and deployed frontend
-    credentials: true, // Allow cookies & authentication headers
-}));
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://coupon-distribution-web-app-ecmj.vercel.app",
+    "https://coupon-distribution-web-app.vercel.app"
+  ];
+  
+  app.use(cors({
+    origin: allowedOrigins,
+    credentials: true, // Allow cookies
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  }));
 app.use(express.json());
 app.use(cookieParser());
 const port = process.env.PORT;
